@@ -20,6 +20,7 @@ python3 main.py
 ```
 
 ### 4. To clean up when done
+\<TODO\>
 ```bash
 clean.py
 ```
