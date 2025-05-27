@@ -3,7 +3,7 @@
 # Checking for existence of .venv
 if [ ! -d ".venv" ]; then
   echo "Creating virtual environment."
-  python3 -m venv .venv
+  python3.11 -m venv .venv
 else
   echo ".venv already exists. Skipping creation."
 fi
