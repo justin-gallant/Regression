@@ -3,7 +3,9 @@ By Justin Gallant
 2025 May 27
 
 ## Get Started 🚀!
-note: this project uses zsh
+### Requirements:
+Python version = 3.11
+
 ### 1. Clone the Repository to get started
 ```zsh
 git clone https://github.com/justin-gallant/regression.git

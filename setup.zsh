@@ -25,5 +25,3 @@ else
 fi
 
 echo "Setup complete. Virtual environment activated!"
-
-
