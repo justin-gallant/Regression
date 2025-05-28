@@ -173,3 +173,6 @@ JetBrains.gitignore
 
 # PyPI configuration file
 .pypirc
+
+# Pyenv version
+.python-version
