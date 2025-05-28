@@ -4,7 +4,8 @@ By Justin Gallant
 
 ## Get Started 🚀!
 ### Requirements:
-Python version = 3.11
+Pyenv
+Python version >=3.11.4
 
 ### 1. Clone the Repository to get started
 ```zsh
