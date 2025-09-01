@@ -1,19 +1,67 @@
-# Bayesian Deep Learning under Distribution Shift – Replication & Extension
+# Bayesian Online Learning Adaption under Distribution Shift
 By Justin Gallant
 
 2025 May 27
 
-> **Portfolio Project** – Replicating and extending  
-> ["Beyond Deep Ensembles: A Large-Scale Evaluation of Bayesian Deep Learning under Distribution Shift" (Seligmann et al., 2023)](https://arxiv.org/abs/2306.12306)
-
+> **Portfolio Project** – Applying the Described Technique  
+> ["Detecting and Adapting to Irregular Distribution
+Shifts in Bayesian Online Learning (Li et al., 2020)"](https://arxiv.org/abs/2012.08101)
 ---
 
 ## Overview
 
-This project reproduces key experiments from the 2023 paper, which evaluates multiple Bayesian Deep Learning (BDL) methods for robustness under real-world distribution shifts.  
-It then **extends** the work with:
-- Bayesian **online updating** under shift,
-- A **streaming prediction service** with uncertainty monitoring,
+This project implements a novel technique in bayesian online learning to infer/predict distribution shift for a new data point, by using a smart prior which adapts to new information. This technique was proposed by Li et Al. (2020) in their paper cited above.
+
+The method consists of creating a smart prior variable and updating this prior based on inferring distribution shifts and data freshness.
+
+The project will implement the technique and compare it against classical prior designs, using a dataset built for in distribution shift benchmarking from the tableshift repository.
+
+---
+
+## Key Concepts
+### Bayesian Learning
+Bayesian Learning is a technique in machine learning, which uses Bayes Formula to treat a model's parameters as random variables, denoted by the set $\theta$; with respective distributions as opposed to a fixed float value.
+
+#### Bayes Formula
+Bayes formula is a formula for computing conditional probabilities. In simple terms,
+$$
+p(A\mid B) = \frac{p(B \mid A) \ p(A)}{p(B)}
+$$
+In our scenario we use it as follows,
+$$
+p(\theta \mid D) = \frac{p(D \mid \theta) \ p(\theta)}{p(D)}
+$$
+In plain english,
+$$
+Posterior= \frac{Likelihood \cdot Prior}{Marginal \ Likelihood}
+$$
+These terms are explained below:
+
+#### Prior, Likelihood, Marginal Likelihood, and Posterior
+#### Prior: 
+A prior is defined as our beliefs about our parameters $\theta$ before seeing any data. 
+
+Denoted $p(\theta)$.
+
+#### Likelihood:
+The Likelihood is defined how probable the observed dataset, $D = \{(x_i, y_i)\}_{i=1}^N$, is given the model parameters $\theta$,
+$$
+p(D \mid \theta) = \prod_{i=1}^N p(y_i \mid x_i, \theta)
+$$
+We assume that each observation $(x_i, y_i)$ is independent and identically distributed (i.i.d.), so every data point contributes equally to our understanding of the parameters. 
+The likelihood expresses how well a particular set of parameters explains all the observed data.
+
+#### Marginal Likelihood (Model Evidence)
+The Marginal Likelihood is how well a model explains the data, given the entire set of parameters. We evaluate $p(D)$ as
+$$
+p(D) = \int p(D \mid \theta) \ p(\theta)\ d\theta
+$$
+Think of it as averaging the likelihood over all plausible parameter values according to the prior. The formula follows naturally from Bayes’ theorem and standard probability rules, a more mathematical yet intuitive explanation can be provided [here](https://stats.stackexchange.com/questions/519422/in-the-most-basic-sense-what-is-marginal-likelihood).
+### Distribution Shift
+A distribution shift in machine learning is 
+
+### Online Learning
+### Proposed Smart Prior
 
 ---
 
@@ -23,7 +71,7 @@ It then **extends** the work with:
    - **ERM** (Empirical Risk Minimization)
    - **Deep Ensembles**
    - **Variational Inference** (Bayes by Backpropagation)
-   - **SWAG** (Stochastic Weight Averaging Gaussian)
+   - **SWA** (Stochastic Weight Averaging)
 
 2. **Analysis** – Evaluate:
    - Accuracy
@@ -59,9 +107,6 @@ project_root/
 
 ## Datasets
 
-- **WILDS CivilComments** – Text classification under subgroup shift  
-  [https://wilds.stanford.edu/](https://wilds.stanford.edu/)
-
 - **TableShift** – Tabular datasets with simulated covariate shift  
   [https://github.com/mlfoundations/tableshift](https://github.com/mlfoundations/tableshift)
 
@@ -75,8 +120,8 @@ Python version >=3.11.4
 
 ### 1. Clone the Repository to get started
 ```zsh
-git clone https://github.com/justin-gallant/regression.git
-cd Regression/
+git clone https://github.com/justin-gallant/bayesian-learning-under-distribution-shift.git
+cd bayesian-learning-under-distribution-shift/
 ```
 ### 2. Create the .venv
 You can use zsh to set up the env!

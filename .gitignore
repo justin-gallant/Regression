@@ -14,3 +14,6 @@ JetBrains.gitignore
 
 # C extensions (if needed)
 *.so
+
+# Datasets
+data/*
