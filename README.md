@@ -10,7 +10,7 @@ Shifts in Bayesian Online Learning (Li et al., 2020)"](https://arxiv.org/abs/201
 
 ## Overview
 
-This project simplifies and implements a conceptual novel technique in bayesian online learning to infer/predict distribution shift for a new data point, by using a smart prior which adapts to new information. This technique was proposed by Li et Al. (2020) in their paper cited above.
+This project simplifies and implements a conceptual novel technique in bayesian online learning to infer/predict distribution shift for a new data point, by using a smart likelihood which adapts to new information. This technique was proposed by Li et Al. (2020) in their paper cited above.
 
 The method consists of creating a smart likelihood variable and updating the likelihood based on weighting surprise from fresh data to infer distribution shifts.
 
