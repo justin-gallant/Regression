@@ -89,6 +89,7 @@ In practice, we ignore $p(D)$ from bayes theorem since we care more about the sh
 Most models also normalize the samples for us or optimize over the posterior, ignoring the need for $p(D)$.
 
 We **DO** need $p(D)$ when we do need absolute probabilities, this is when we are comparing models via their marginal likelihood or are computing a predictive probability.
+There are ways around this like MCMC simulations or Laplace Approximations when calculating $p(D)$ is impossible or intensive.
 
 ### Distribution Shift
 In a perfect world with machine learning, we assume that the actual distribution of evaluatable data will remain identical to training data. 
