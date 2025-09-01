@@ -13,6 +13,7 @@ Shifts in Bayesian Online Learning (Li et al., 2020)"](https://arxiv.org/abs/201
 This project simplifies and implements a conceptual novel technique in bayesian online learning to infer/predict distribution shift for a new data point, by using a smart likelihood which adapts to new information. This technique was proposed by Li et Al. (2020) in their paper cited above.
 
 The method consists of creating a smart likelihood variable and updating the likelihood based on weighting surprise from fresh data to infer distribution shifts.
+As well as using our previous posterior as a substitute for the prior in updating.
 
 The project will implement the technique and compare it against classical prior designs, using a dataset built for in distribution shift benchmarking from the tableshift repository.
 
@@ -83,7 +84,8 @@ We can describe a simple posterior update in practice as
 
 $p(\theta \mid D_1) \propto p(D_1 \mid \theta) \ p(\theta)$
 
-We refer to our data as $D_1$ since we assume it follows the same distribution in training and in evaluation, ie. the first distribution. In our model this is different.
+The simple bayesian update references the original distribution of the training data, $D_1$ since we assume it follows the same distribution in training and in evaluation, ie. the first distribution. 
+In our model this is different, since we deliberately substitute our most recent posterior in for our prior.
 
 In practice, we ignore $p(D)$ from bayes theorem since we care more about the shape of the posterior than if the result is normalized (follows a valid probability distribution), as it is computationally expensive. 
 Most models also normalize the samples for us or optimize over the posterior, ignoring the need for $p(D)$.
@@ -99,16 +101,21 @@ This causes our models to become less accurate and more biased to past trends.
 
 For our project, we are integrating online learning specifically with bayesian modelling to update the prior beliefs of our model given a sequential dataset, with the goal of improving our model. 
 
-### Proposed Shift-Aware Likelihood
+### Proposed Shift-Aware Updating
 The goal of using smart online learning to be aware of distribution shift in active model deployment and updating our model with more information as it is learned.
 
 Essentially, our technique boils down to: while evaluating the likelihood, we are asking "How surprising is this new data, given my previous observations?"
 
-To accomplish our smart likelihood, our bayesian update of our posterior takes on an updated format.
+To accomplish our smart likelihood, our bayesian update of our posterior takes on an updated format doing two new things, adapted from a simple bayesian update. 
+In english this is the comparison between simple and online bayesian updating:
+
+$\text{posterior} \propto \text{likelihood} \ \cdot \ \text{prior}$
+
+$\text{new posterior} \propto \text{shift-aware likelihood} \ \cdot \ \text{old posterior}$
+
+With a respective formula:
 
 $p(\theta \mid D_{1:t}) \propto \tilde{p}(D_t \mid \theta) \ p(\theta \mid D_{1:t-1})$
-
-$\text{new posterior} \propto \text{shift-aware likelihood of data given params} \ \cdot \ \text{old posterior}$
 
 Where our likelihood of the new data given our parameters is:
 
@@ -133,6 +140,7 @@ We've simply gone in and added a calculation to add new data to the posterior, i
 ---
 
 ## Methods
+### Data Processing & Embedding
 ### Model Selection
 Gaussian Mixed Model (GMM) - Probabilistic Deep Learning for Anomaly Selection
 
