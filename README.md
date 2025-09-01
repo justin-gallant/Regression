@@ -84,6 +84,8 @@ We can describe a simple posterior update in practice as
 
 $p(\theta \mid D_1) \propto p(D_1 \mid \theta) \ p(\theta)$
 
+$\text{posterior} \propto \text{likelihood} \ \cdot \ \text{prior}$
+
 The simple bayesian update references the original distribution of the training data, $D_1$ since we assume it follows the same distribution in training and in evaluation, ie. the first distribution. 
 In our model this is different, since we deliberately substitute our most recent posterior in for our prior.
 
@@ -107,9 +109,7 @@ The goal of using smart online learning to be aware of distribution shift in act
 Essentially, our technique boils down to: while evaluating the likelihood, we are asking "How surprising is this new data, given my previous observations?"
 
 To accomplish our smart likelihood, our bayesian update of our posterior takes on an updated format doing two new things, adapted from a simple bayesian update. 
-In english this is the comparison between simple and online bayesian updating:
-
-$\text{posterior} \propto \text{likelihood} \ \cdot \ \text{prior}$
+This new updating technique is as follows: 
 
 $\text{new posterior} \propto \text{shift-aware likelihood} \ \cdot \ \text{old posterior}$
 
