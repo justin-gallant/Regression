@@ -115,7 +115,7 @@ $\tilde{p}(D_t \mid \theta)=w_t(D_t) \ p(D_t \mid \theta),$
 
 $\text{shift-aware likelihood of data given params} = \text{weighted surprise} \ \cdot \ \text{likelihood of data given params}$
 
-Where $w_t(D_t)=f(surprise(x_t,y_t))$, which is a weighted surprise defined by some function $f$. 
+Where $w_t(D_t)=f(surprise(x_t,y_t))$, which is a weighted surprise defined by some weight function $f$. 
 This function can often possess a hyperparameter controlling weight sensitivity. 
 Surprise is calculated by a model in evaluation, intuitively it is exactly what it sounds like.
 
