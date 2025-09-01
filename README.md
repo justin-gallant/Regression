@@ -18,9 +18,10 @@ The project will implement the technique and compare it against classical prior 
 
 ---
 
-## Key Concepts
-Requirements:
-Calculus based Probability, some understanding of machine learning.
+## Conceptual Breakdown of the Shift-Aware Bayesian Updating Technique, from 0 to 100
+Ideal Requirements:
+- Calculus based Probability
+- Some understanding of machine learning and basic notation.
 
 ### Bayesian Learning
 Bayesian Learning is a technique in machine learning, which uses Bayes Formula to treat a model's parameters as random variables, denoted by the set $\theta$; with respective distributions as opposed to a fixed float value.
@@ -78,9 +79,11 @@ This technique is often very useful in time series or sequential datasets where 
 Bayesian Updating is the technique used to update our likelihood, essentially how a bayesian model would implement online learning. 
 Standard bayesian updating uses bayes formula from above. 
 
-We can describe our posterior update in practice as 
+We can describe a simple posterior update in practice as 
 
 $p(\theta \mid D_1) \propto p(D_1 \mid \theta) \ p(\theta)$
+
+We refer to our data as $D_1$ since we assume it follows the same distribution in training and in evaluation, ie. the first distribution. In our model this is different.
 
 In practice, we ignore $p(D)$ from bayes theorem since we care more about the shape of the posterior than if the result is normalized (follows a valid probability distribution), as it is computationally expensive. 
 Most models also normalize the samples for us or optimize over the posterior, ignoring the need for $p(D)$.
@@ -95,12 +98,41 @@ This causes our models to become less accurate and more biased to past trends.
 
 For our project, we are integrating online learning specifically with bayesian modelling to update the prior beliefs of our model given a sequential dataset, with the goal of improving our model. 
 
-### Proposed Smart Likelihood
+### Proposed Shift-Aware Likelihood
 The goal of using smart online learning to be aware of distribution shift in active model deployment and updating our model with more information as it is learned.
 
 Essentially, our technique boils down to: while evaluating the likelihood, we are asking "How surprising is this new data, given my previous observations?"
 
+To accomplish our smart likelihood, our bayesian update of our posterior takes on an updated format.
 
+$
+p(\theta \mid D_{1:t}) \propto \tilde{p}(D_t \mid \theta) \ p(\theta \mid D_{1:t-1})
+$
+
+$
+\text{new posterior} \propto \text{shift-aware likelihood of data given params} \ \cdot \ \text{old posterior}
+$
+
+Where our likelihood of the new data given our parameters is:
+
+$
+\tilde{p}(D_t \mid \theta)=w_t(D_t) \ p(D_t \mid \theta),
+$ 
+
+$
+\text{shift-aware likelihood of data given params} = \text{weighted surprise} \ \cdot \ \text{likelihood of data given params}
+$
+
+Where $ w_t(D_t)=f(surprise(x_t,y_t))$, which is a weighted surprise defined by some function $f$. 
+This function can often possess a hyperparameter controlling weight sensitivity. 
+Surprise is calculated by a model in evaluation, intuitively it is exactly what it sounds like.
+
+The update of our posterior given our weighted surprise allows us to gauge if a distribution shift has actually occured or not. 
+
+Conceptually, we are evaluating $\text{new knowledge} = \text{evidence} \ \cdot \ \text{previous knowledge}$,
+The intuitive explanation is that regions of $\theta$ which explain the new data are upweighted, and regions that don't are downweighted. The model will learn more from data which reinforces its past assumptions, but will also align with shocking data violating or differing from its previous assumptions.
+
+We've simply gone in and added a calculation to add new data to the posterior, instead of assuming the posterior follows an identical distribution to training.
 
 ---
 
