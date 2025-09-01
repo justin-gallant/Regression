@@ -24,17 +24,17 @@ Bayesian Learning is a technique in machine learning, which uses Bayes Formula t
 
 #### Bayes Formula
 Bayes formula is a formula for computing conditional probabilities. In simple terms,
-$$
-p(A\mid B) = \frac{p(B \mid A) \ p(A)}{p(B)}
-$$
+
+$p(A\mid B) = \frac{p(B \mid A) \ p(A)}{p(B)}$
+
 In our scenario we use it as follows,
-$$
-p(\theta \mid D) = \frac{p(D \mid \theta) \ p(\theta)}{p(D)}
-$$
+
+$p(\theta \mid D) = \frac{p(D \mid \theta) \ p(\theta)}{p(D)}$
+
 In plain english,
-$$
-Posterior= \frac{Likelihood \cdot Prior}{Marginal \ Likelihood}
-$$
+
+$Posterior= \frac{Likelihood \cdot Prior}{Marginal \ Likelihood}$
+
 These terms are explained below:
 
 #### Prior, Likelihood, Marginal Likelihood, and Posterior
@@ -45,18 +45,19 @@ Denoted $p(\theta)$.
 
 #### Likelihood:
 The Likelihood is defined how probable the observed dataset, $D = \{(x_i, y_i)\}_{i=1}^N$, is given the model parameters $\theta$,
-$$
-p(D \mid \theta) = \prod_{i=1}^N p(y_i \mid x_i, \theta)
-$$
+
+$p(D \mid \theta) = \prod_{i=1}^N p(y_i \mid x_i, \theta)$
+
 We assume that each observation $(x_i, y_i)$ is independent and identically distributed (i.i.d.), so every data point contributes equally to our understanding of the parameters. 
 The likelihood expresses how well a particular set of parameters explains all the observed data.
 
 #### Marginal Likelihood (Model Evidence)
 The Marginal Likelihood is how well a model explains the data, given the entire set of parameters. We evaluate $p(D)$ as
-$$
-p(D) = \int p(D \mid \theta) \ p(\theta)\ d\theta
-$$
+
+$p(D) = \int p(D \mid \theta) \ p(\theta)\ d\theta$
+
 Think of it as averaging the likelihood over all plausible parameter values according to the prior. The formula follows naturally from Bayes’ theorem and standard probability rules, a more mathematical yet intuitive explanation can be provided [here](https://stats.stackexchange.com/questions/519422/in-the-most-basic-sense-what-is-marginal-likelihood).
+
 ### Distribution Shift
 A distribution shift in machine learning is 
 
