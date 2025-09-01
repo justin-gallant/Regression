@@ -117,7 +117,9 @@ $\text{shift-aware likelihood of data given params} = \text{weighted surprise} \
 
 Where $w_t(D_t)=f(surprise(x_t,y_t))$, which is a weighted surprise defined by some weight function $f$. 
 This function can often possess a hyperparameter controlling weight sensitivity. 
-Surprise is calculated by a model in evaluation, intuitively it is exactly what it sounds like.
+Surprise is calculated by a model in evaluation, intuitively it is exactly what it sounds like. How unexpected is this outcome?
+
+Statisticians may recognize surprise through entropy, where entropy is the distribution of surprise across data ($H(X)=\mathbb{E}[Surprise(X)]$). How uncertain are the outcomes of all data?
 
 The update of our posterior given our weighted surprise allows us to gauge if a distribution shift has actually occured or not. 
 
