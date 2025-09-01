@@ -10,9 +10,9 @@ Shifts in Bayesian Online Learning (Li et al., 2020)"](https://arxiv.org/abs/201
 
 ## Overview
 
-This project implements a novel technique in bayesian online learning to infer/predict distribution shift for a new data point, by using a smart prior which adapts to new information. This technique was proposed by Li et Al. (2020) in their paper cited above.
+This project simplifies and implements a conceptual novel technique in bayesian online learning to infer/predict distribution shift for a new data point, by using a smart prior which adapts to new information. This technique was proposed by Li et Al. (2020) in their paper cited above.
 
-The method consists of creating a smart prior variable and updating this prior based on inferring distribution shifts and data freshness.
+The method consists of creating a smart likelihood variable and updating the likelihood based on weighting surprise from fresh data to infer distribution shifts.
 
 The project will implement the technique and compare it against classical prior designs, using a dataset built for in distribution shift benchmarking from the tableshift repository.
 
@@ -130,19 +130,26 @@ We've simply gone in and added a calculation to add new data to the posterior, i
 
 ---
 
+## Methods
+### Model Selection
+Gaussian Mixed Model (GMM) - Probabilistic Deep Learning for Anomaly Selection
+
+1. Base - Trained on the IID split, Evaluated on near and far
+2. Online Update - Trained on IID split, evaluated on near, then far
+
+
+---
+
 ##  Project Structure
 ```plaintext
-project_root/
+bayesian-learning-under-distribution-shift/
 ├── README.md
 ├── requirements.txt
 ├── data/
 ├── notebooks/
 │ ├── 0_data_exploration.ipynb
 │ ├── 1_replicate_baselines.ipynb
-│ ├── 2_calibration_analysis.ipynb
-│ ├── 3_extension_bayesian_updates.ipynb
-│ ├── 4_extension_streaming_service.ipynb
-│ └── 5_tabular_finance_shift.ipynb
+│ └── 2_tabular_finance_shift.ipynb
 ├── scripts/
 ├── results/
 └── reports/
@@ -152,8 +159,7 @@ project_root/
 
 ## Datasets
 
-- **TableShift** – Tabular datasets with simulated covariate shift  
-  [https://github.com/mlfoundations/tableshift](https://github.com/mlfoundations/tableshift)
+- **AnoShift** – Dataset accessible [https://github.com/bit-ml/AnoShift/](https://github.com/bit-ml/AnoShift/)
 
 ---
 
@@ -187,7 +193,14 @@ python3 clean.py
 ---
 
 ## References
-Seligmann et al. (2023) – Beyond Deep Ensembles: A Large-Scale Evaluation of Bayesian Deep Learning under Distribution Shift
+Li, A., Boyd, A., Smyth, P., & Mandt, S. (2021). Detecting and Adapting to Irregular Distribution Shifts in Bayesian Online Learning. 
+Proceedings of the 35th Conference on Neural Information Processing Systems (NeurIPS 2021). 
+Retrieved from https://proceedings.neurips.cc/paper/2021/file/362387494f6be6613daea643a7706a42-Paper.pdf
 
-Koh et al. (2021) – WILDS: A Benchmark of in-the-Wild Distribution Shifts
+Dragoi, M., Burceanu, E., Haller, E., Manolache, A., & Brad, F. (2022). AnoShift: A Distribution Shift Benchmark for Unsupervised Anomaly Detection. 
+Proceedings of the 36th Conference on Neural Information Processing Systems (NeurIPS 2022). 
+Retrieved from https://proceedings.neurips.cc/paper_files/paper/2022/file/d3bcbcb2a7b0b4716bf24ce4b2ea8d60-Paper-Datasets_and_Benchmarks.pdf
 
+arXiv links:
+- [Detecting and Adapting to Irregular Distribution Shifts in Bayesian Online Learning - arXiv](https://arxiv.org/abs/2012.08101)
+- [AnoShift: A Distribution Shift Benchmark for Unsupervised Anomaly Detection - arXiv](https://arxiv.org/abs/2206.15476)
