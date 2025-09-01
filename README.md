@@ -105,23 +105,15 @@ Essentially, our technique boils down to: while evaluating the likelihood, we ar
 
 To accomplish our smart likelihood, our bayesian update of our posterior takes on an updated format.
 
-$
-p(\theta \mid D_{1:t}) \propto \tilde{p}(D_t \mid \theta) \ p(\theta \mid D_{1:t-1})
-$
+$p(\theta \mid D_{1:t}) \propto \tilde{p}(D_t \mid \theta) \ p(\theta \mid D_{1:t-1})$
 
-$
-\text{new posterior} \propto \text{shift-aware likelihood of data given params} \ \cdot \ \text{old posterior}
-$
+$\text{new posterior} \propto \text{shift-aware likelihood of data given params} \ \cdot \ \text{old posterior}$
 
 Where our likelihood of the new data given our parameters is:
 
-$
-\tilde{p}(D_t \mid \theta)=w_t(D_t) \ p(D_t \mid \theta),
-$ 
+$\tilde{p}(D_t \mid \theta)=w_t(D_t) \ p(D_t \mid \theta),$ 
 
-$
-\text{shift-aware likelihood of data given params} = \text{weighted surprise} \ \cdot \ \text{likelihood of data given params}
-$
+$\text{shift-aware likelihood of data given params} = \text{weighted surprise} \ \cdot \ \text{likelihood of data given params}$
 
 Where $ w_t(D_t)=f(surprise(x_t,y_t))$, which is a weighted surprise defined by some function $f$. 
 This function can often possess a hyperparameter controlling weight sensitivity. 
